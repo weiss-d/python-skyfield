@@ -86,13 +86,13 @@ or how early I need to rise to see the morning sky:
 .. testcode::
 
     import datetime as dt
-    from pytz import timezone
+    from zoneinfo import ZoneInfo
     from skyfield import almanac
     from skyfield.api import N, W, wgs84, load
 
     # Figure out local midnight.
-    zone = timezone('US/Eastern')
-    now = zone.localize(dt.datetime.now())
+    zone = ZoneInfo('US/Eastern')
+    now = dt.datetime.now(dt.UTC).astimezone(zone)
     midnight = now.replace(hour=0, minute=0, second=0, microsecond=0)
     next_midnight = midnight + dt.timedelta(days=1)
 
